@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B0443301C80465B0054580F /* LMHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B04432F1C80465B0054580F /* LMHelper.swift */; };
+		5B0443321C804C560054580F /* LMLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0443311C804C560054580F /* LMLog.swift */; };
+		5B0443341C804D6B0054580F /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0443331C804D6B0054580F /* UIColor+Hex.swift */; };
+		5B0443361C804E9D0054580F /* UIImage+FixOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0443351C804E9D0054580F /* UIImage+FixOrientation.swift */; };
+		5B0443381C804EBD0054580F /* UIViewController+Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0443371C804EBD0054580F /* UIViewController+Transition.swift */; };
 		5B5F32631C294FCD006CEC27 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5F32621C294FCD006CEC27 /* AppDelegate.swift */; };
-		5B5F32651C294FCD006CEC27 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5F32641C294FCD006CEC27 /* ViewController.swift */; };
 		5B5F32681C294FCD006CEC27 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B5F32661C294FCD006CEC27 /* Main.storyboard */; };
 		5B5F326A1C294FCD006CEC27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B5F32691C294FCD006CEC27 /* Assets.xcassets */; };
 		5B5F326D1C294FCD006CEC27 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B5F326B1C294FCD006CEC27 /* LaunchScreen.storyboard */; };
@@ -18,13 +22,17 @@
 /* Begin PBXFileReference section */
 		095B9450F4F2CA77C035A23F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		1138A7A2A76AA09BED4E7864 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B04432F1C80465B0054580F /* LMHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMHelper.swift; sourceTree = "<group>"; };
+		5B0443311C804C560054580F /* LMLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LMLog.swift; sourceTree = "<group>"; };
+		5B0443331C804D6B0054580F /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		5B0443351C804E9D0054580F /* UIImage+FixOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+FixOrientation.swift"; sourceTree = "<group>"; };
+		5B0443371C804EBD0054580F /* UIViewController+Transition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Transition.swift"; sourceTree = "<group>"; };
 		5B5F325F1C294FCD006CEC27 /* LMChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LMChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5B5F32621C294FCD006CEC27 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5B5F32641C294FCD006CEC27 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5B5F32621C294FCD006CEC27 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = LMChat/AppDelegate.swift; sourceTree = "<group>"; };
 		5B5F32671C294FCD006CEC27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5B5F32691C294FCD006CEC27 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5B5F326C1C294FCD006CEC27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		5B5F326E1C294FCD006CEC27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B5F326E1C294FCD006CEC27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = LMChat/Info.plist; sourceTree = "<group>"; };
 		A93396850D1892AF9350D873 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -48,10 +56,111 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5B0443211C803BEC0054580F /* LMChatDemo */ = {
+			isa = PBXGroup;
+			children = (
+				5B5F32621C294FCD006CEC27 /* AppDelegate.swift */,
+				5B5F32661C294FCD006CEC27 /* Main.storyboard */,
+				5B5F326B1C294FCD006CEC27 /* LaunchScreen.storyboard */,
+				5B5F326E1C294FCD006CEC27 /* Info.plist */,
+			);
+			name = LMChatDemo;
+			sourceTree = "<group>";
+		};
+		5B0443221C803CD00054580F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		5B0443241C803D080054580F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		5B0443251C803D120054580F /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				5B04432B1C8045CB0054580F /* Ex */,
+				5B04432D1C8045DF0054580F /* Manager */,
+				5B04432E1C8045F30054580F /* Other */,
+			);
+			name = Others;
+			sourceTree = "<group>";
+		};
+		5B0443261C803D1C0054580F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5B5F32691C294FCD006CEC27 /* Assets.xcassets */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		5B0443271C803D280054580F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5B04432A1C8042CE0054580F /* Cell */,
+				5B0443291C8042C50054580F /* Input */,
+				5B0443281C8042BC0054580F /* Other */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		5B0443281C8042BC0054580F /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
+		5B0443291C8042C50054580F /* Input */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Input;
+			sourceTree = "<group>";
+		};
+		5B04432A1C8042CE0054580F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		5B04432B1C8045CB0054580F /* Ex */ = {
+			isa = PBXGroup;
+			children = (
+				5B04432F1C80465B0054580F /* LMHelper.swift */,
+				5B0443311C804C560054580F /* LMLog.swift */,
+				5B0443331C804D6B0054580F /* UIColor+Hex.swift */,
+				5B0443351C804E9D0054580F /* UIImage+FixOrientation.swift */,
+				5B0443371C804EBD0054580F /* UIViewController+Transition.swift */,
+			);
+			name = Ex;
+			sourceTree = "<group>";
+		};
+		5B04432D1C8045DF0054580F /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Manager;
+			sourceTree = "<group>";
+		};
+		5B04432E1C8045F30054580F /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
 		5B5F32561C294FCD006CEC27 = {
 			isa = PBXGroup;
 			children = (
 				5B5F32611C294FCD006CEC27 /* LMChat */,
+				5B0443211C803BEC0054580F /* LMChatDemo */,
 				5B5F32601C294FCD006CEC27 /* Products */,
 				88997062C49E6DB139CE4715 /* Pods */,
 				350A6D9B5DF4B043C09D4495 /* Frameworks */,
@@ -69,12 +178,11 @@
 		5B5F32611C294FCD006CEC27 /* LMChat */ = {
 			isa = PBXGroup;
 			children = (
-				5B5F32621C294FCD006CEC27 /* AppDelegate.swift */,
-				5B5F32641C294FCD006CEC27 /* ViewController.swift */,
-				5B5F32661C294FCD006CEC27 /* Main.storyboard */,
-				5B5F32691C294FCD006CEC27 /* Assets.xcassets */,
-				5B5F326B1C294FCD006CEC27 /* LaunchScreen.storyboard */,
-				5B5F326E1C294FCD006CEC27 /* Info.plist */,
+				5B0443221C803CD00054580F /* Controllers */,
+				5B0443241C803D080054580F /* Models */,
+				5B0443251C803D120054580F /* Others */,
+				5B0443261C803D1C0054580F /* Resources */,
+				5B0443271C803D280054580F /* Views */,
 			);
 			path = LMChat;
 			sourceTree = "<group>";
@@ -210,7 +318,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B5F32651C294FCD006CEC27 /* ViewController.swift in Sources */,
+				5B0443321C804C560054580F /* LMLog.swift in Sources */,
+				5B0443341C804D6B0054580F /* UIColor+Hex.swift in Sources */,
+				5B0443301C80465B0054580F /* LMHelper.swift in Sources */,
+				5B0443381C804EBD0054580F /* UIViewController+Transition.swift in Sources */,
+				5B0443361C804E9D0054580F /* UIImage+FixOrientation.swift in Sources */,
 				5B5F32631C294FCD006CEC27 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -224,6 +336,7 @@
 				5B5F32671C294FCD006CEC27 /* Base */,
 			);
 			name = Main.storyboard;
+			path = LMChat;
 			sourceTree = "<group>";
 		};
 		5B5F326B1C294FCD006CEC27 /* LaunchScreen.storyboard */ = {
@@ -232,6 +345,7 @@
 				5B5F326C1C294FCD006CEC27 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = LMChat;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

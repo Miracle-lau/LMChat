@@ -39,9 +39,12 @@ extension UIViewController {
         SIMLog.trace()
         
         
-        let src = self
-        let dest = viewControllerToPresent
-        let window = transi
+//        let src = self
+//        let dest = viewControllerToPresent
+//        let window = TransitionContext.window
+//        let context = src.modalTransitionContext
+//        let mask = UIView()
+        
     
     
     }
@@ -49,7 +52,17 @@ extension UIViewController {
 
 
 
-
+    var modalTransitionContext: TransitionContext! {
+        set {
+            self.willChangeValueForKey("modalTransitionContext")
+            objc_setAssociatedObject(self, modalTransitionContextKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            self.didChangeValueForKey("modalTransitionContext")
+        
+        }
+        get {
+            return objc_getAssociatedObject(self, modalTransitionContextKey) as? TransitionContext
+        }
+    }
 
 }
 
@@ -62,9 +75,33 @@ class TransitionContext: NSObject {
     weak var toView: UIView?
     
     var fromViewSnapshoot: UIImage! {
-        
+        // 如果本来就是 imageview, 无需生成
+        if let v = fromView as? UIImageView {
+            if let img = v.image ?? toViewSnapshoot {
+                return img
+            }
+        }
+        // 打个快照
+        return fromView?.snapShot()
     }
-
+    
+    var toViewSnapshoot: UIImage! {
+        // 如果本来就是 imageview, 无需生成
+        if let v = toView as? UIImageView {
+            if let img = v.image {
+                return img
+            }
+        }
+        return toView?.snapShot()
+    }
+    
+    // TODO: 因为是直接使用addSubview到window, 所以转屏有问题. 有时间再处理
+    static var window: UIWindow = {
+        let w = UIWindow(frame: UIScreen.mainScreen().bounds)
+        w.windowLevel = UIWindowLevelStatusBar + 10
+        return w
+    }()
 
 }
 
+let modalTransitionContextKey = unsafeAddressOf("modalTransitionContextKey")

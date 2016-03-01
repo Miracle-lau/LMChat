@@ -9,7 +9,7 @@
 import Foundation
 
 /// log manager
-class SIMLog : NSObject {
+class LMLog : NSObject {
     
     /// trace level
     class func trace(message: Any = "",

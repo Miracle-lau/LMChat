@@ -160,7 +160,6 @@ extension UIViewController {
             self.willChangeValueForKey("modalTransitionContext")
             objc_setAssociatedObject(self, modalTransitionContextKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             self.didChangeValueForKey("modalTransitionContext")
-        
         }
         get {
             return objc_getAssociatedObject(self, modalTransitionContextKey) as? TransitionContext

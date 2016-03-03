@@ -128,20 +128,52 @@ class LMChatTextField: LMView {
         return CGSizeMake(bounds.width, max(textView.contentSize.height, 36) + 10)
     }
     
-    /// 最大高度
-    var maxHeight: CGFloat = 80
-    /// 代理
-    weak var delegate: LMChatTextFieldDelegate?
+    /// 内容
+    var text: String! {
+        set {
+            self.textView.text = newValue
+            self.textViewDidChange(textView)
+        }
+        get {
+            return self.textView.text
+        }
+    }
     
+    /// 是否开启
+    var enabled: Bool = true {
+        willSet {
+            // 关闭输入
+            self.backgroundView.highlighted = newValue
+            self.textView.userInteractionEnabled = newValue
+            
+            for view in self.subviews {
+                if let btn = view as? UIButton {
+                    btn.enabled = newValue
+                }
+            }
+        }
+    }
     
-    
-    
+    /// 当前选中的
     var selectedStyle: LMChatTextFieldItemStyle = .None {
         didSet {
             self.delegate?.chatTextField?(self, didSelectedItem: selectedStyle.rawValue)
         }
     }
-
+    
+    var contentSize: CGSize {
+        return self.textView.contentSize
+    }
+    
+    var contentOffset: CGPoint {
+        return self.textView.contentOffset
+    }
+    
+    /// 最大高度
+    var maxHeight: CGFloat = 80
+    /// 代理
+    weak var delegate: LMChatTextFieldDelegate?
+    
     private var selectedItem: LMChatTextFieldItem? {
         willSet {
             self.selectedItem?.actived = false
@@ -166,10 +198,8 @@ class LMChatTextField: LMView {
 
 // MARK: - Type
 extension LMChatTextField {
-
     /// 输入输的选项
     class LMChatTextFieldItem: UIButton {
-        
         /// 初始化
         required init?(coder aDecoder: NSCoder) {
             self.style = .Keyboard
@@ -221,9 +251,94 @@ extension LMChatTextField {
 }
 
 extension LMChatTextField: UITextViewDelegate {
-    // 将要编辑文本
+    /// 将要编辑文本
     func textViewShouldBeginEditing(textView: UITextView) -> Bool {
-        return true
+        if delegate?.chatTextFieldShouldBeginEditing?(self) ?? true {
+            // 取消选中
+            self.selectedItem = nil
+            self.selectedStyle = .Keyboard
+            // ok
+            return true
+        }
+        return false
+    }
+    /// 已经开始编辑
+    func textViewDidBeginEditing(textView: UITextView) {
+        delegate?.chatTextFieldDidBeginEditing?(self)
+    }
+    /// 将要结束
+    func textViewShouldEndEditing(textView: UITextView) -> Bool {
+        if delegate?.chatTextFieldShouldEndEditing?(self) ?? true {
+            return true
+        }
+        return false
+    }
+    /// 文本将要改变
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        if delegate?.chatTextField?(self, shouldChangeCharactersInRange: range, replacementString: text) ?? true {
+            // 换行
+            if text == "\n" {
+                return self.delegate?.chatTextFieldShouldReturn?(self) ?? true
+            }
+            // clear
+            if text.isEmpty {
+                return self.delegate?.chatTextFieldShouldClear?(self) ?? true
+            }
+            // 其他
+            return true
+        }
+        return false
+    }
+    /// 文本已经改变
+    func textViewDidChange(textView: UITextView) {
+        // 必须要先更新一下, 否则高度计算不准确
+        self.textView.layoutIfNeeded()
+        let src = textView.bounds.height
+        let dst = textView.contentSize.height
+        // 只有不同才会调整
+        if src != dst {
+            if textView.contentSize.height < maxHeight {
+                LMLog.trace("src: \(src), dst: \(dst)")
+                UIView.animateWithDuration(0.25, animations: { () -> Void in
+                    // 重新计算内置尺寸
+                    self.invalidateIntrinsicContentSize()
+                    self.layoutIfNeeded()
+                    self.superview?.layoutIfNeeded()
+                })
+                // 更新 offset
+                textView.setContentOffset(CGPointZero, animated: true)
+                // 大小发生了改变, 通知
+                delegate?.chatTextFieldContentSizeDidChange?(self)
+            }
+        }
+        // 通知
+        delegate?.chatTextFieldDidChange?(self)
+    }
+    /// 滚动到最后
+    func scrollViewToBottom() {
+        LMLog.trace()
+        let ch = textView.contentSize.height
+        let bh = textView.bounds.height
+        let py = textView.contentOffset.y
+        if ch - bh > py {
+            textView.setContentOffset(CGPointMake(0, ch - bh), animated: true)
+        }
+    }
+}
+
+// MARK: - Event
+extension LMChatTextField {
+    /// 选项
+    func onItem(sender: LMChatTextFieldItem) {
+        if sender.actived {
+            self.selectedItem = nil
+            self.selectedStyle = .Keyboard
+            self.textView.becomeFirstResponder()
+        } else {
+            self.selectedItem = sender
+            self.selectedStyle = sender.style
+            self.textView.resignFirstResponder()
+        }
     }
 }
 
@@ -241,5 +356,18 @@ enum LMChatTextFieldItemStyle: Int {
     
     optional func chatTextField(chatTextField: LMChatTextField, didSelectedItem item: Int)
     
+    optional func chatTextFieldShouldBeginEditing(chatTextField: LMChatTextField) -> Bool
+    optional func chatTextFieldDidBeginEditing(chatTextField: LMChatTextField)
+    
+    optional func chatTextFieldShouldEndEditing(chatTextField: LMChatTextField) -> Bool
+    optional func chatTextFieldDidEndEditing(chatTextField: LMChatTextField)
+    
+    optional func chatTextFieldDidChange(chatTextField: LMChatTextField)
+    optional func chatTextField(chatTextField: LMChatTextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool
+    
+    optional func chatTextFieldContentSizeDidChange(chatTextField: LMChatTextField)
+    
+    optional func chatTextFieldShouldClear(chatTextField: LMChatTextField) -> Bool
+    optional func chatTextFieldShouldReturn(chatTextField: LMChatTextField) -> Bool
     
 }
